@@ -1,0 +1,17 @@
+<%= turbo_stream_from "messages" %>
+
+<h1>AROUND YOU:</h1>
+
+<div id="messages" class="messages-container">
+  <%= turbo_frame_tag "messages" do %>
+    <%= render @messages %>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+  <%= turbo_frame_tag "new_message" do %>
+    <%= render "form", message: @new_message %>
+  <% end %>
+<% end %>
+  
+  
