@@ -9,5 +9,5 @@ class Message < ApplicationRecord
   def clear_content
     self.content = ""
   end
-  
+
 end

@@ -4,7 +4,25 @@ class MessagesController < ApplicationController
 
   # GET /messages or /messages.json
   def index
-    @messages = Message.all
+    if(params.has_key?(:message))
+      general = params[:message][:general]
+      business = params[:message][:business]
+      if general == "1" && business == "1"
+        puts "TOUT DOIT ETRE VISIBLE"
+        @messages = Message.all
+      elsif general == "1" && business == "0"
+        puts "GENERAL DOIT ETRE VISIBLE"
+        @messages = Message.where(category: "general")
+      elsif general == "0" && business == "1"
+        puts "BUSINESS DOIT ETRE VISIBLE"
+        @messages = Message.where(category: "business")
+      elsif general == "0" && business == "0"
+        @messages = ["Selectionne un salon"]
+      else
+        @messages = Message.all
+      end
+    end
+    
     @new_message = Message.new
   end
 

@@ -1,0 +1,12 @@
+
+<div>
+  Salons :
+  <%=  form_for(:message, :url => { :action => "index" }, :html => {:method => :get} ) do |f| %>
+    <%= f.label "General" %> 
+    <%= f.check_box :general, checked: true %> 
+    <%= f.label "Commerce" %> 
+    <%= f.check_box :business, checked: true %> 
+    <%= f.submit "trier" %>
+  <% end %>
+</div>
+
