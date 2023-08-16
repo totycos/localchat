@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
+  # before_action :update_user_location, only: [:index]
 
   # GET /messages or /messages.json
   def index
@@ -63,6 +64,22 @@ class MessagesController < ApplicationController
     end
   end
 
+  def update_user_location
+    puts "ON EST DANS LE MESSAGE CONTROLLER !"
+    puts "Params: #{params.inspect}"
+    puts "Current user : #{current_user.id}"
+
+    location = Location.find_or_initialize_by(user_id: current_user.id)
+    location.latitude = user_location_params[:latitude]
+    location.longitude = user_location_params[:longitude]
+
+    if location.save
+      render json: { message: "Coordonnées mises à jour avec succès." }
+    else
+      render json: { error: "Erreur lors de la mise à jour des coordonnées." }, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
@@ -73,4 +90,9 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:user_id, :content, :category)
     end
+
+    def user_location_params
+      params.require(:location).permit(:latitude, :longitude)
+    end
+
 end
