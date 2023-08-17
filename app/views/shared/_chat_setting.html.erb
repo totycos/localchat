@@ -1,0 +1,12 @@
+
+<div>
+  Canaux de discussion :
+  <%= form_for(current_user.chat_setting, url: update_chat_setting_messages_path, method: :patch) do |f| %>
+    <%= f.label "General" %> 
+    <%= f.check_box :general %> 
+    <%= f.label "Commerce" %> 
+    <%= f.check_box :business %> 
+    <%= f.submit "trier" %>
+  <% end %>
+</div>
+

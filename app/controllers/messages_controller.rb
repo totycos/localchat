@@ -3,18 +3,21 @@ class MessagesController < ApplicationController
 
   # GET /messages or /messages.json
   def index
-    if(params.has_key?(:message))
-      general = params[:message][:general]
-      business = params[:message][:business]
+    chat_setting = ChatSetting.find_by(user_id: current_user.id)
+    if chat_setting
+      general = chat_setting.general
+      business = chat_setting.business
       if general == "1" && business == "1"
         puts "TOUT DOIT ETRE VISIBLE"
-        @messages = Message.all
+        @messages = Message.where(category: ["general", "business"])
       elsif general == "1" && business == "0"
         puts "GENERAL DOIT ETRE VISIBLE"
         @messages = Message.where(category: "general")
       elsif general == "0" && business == "1"
         puts "BUSINESS DOIT ETRE VISIBLE"
         @messages = Message.where(category: "business")
+      elsif general == "0" && business == "0"
+        @messages = []
       else
         @messages = []
       end
@@ -97,6 +100,23 @@ class MessagesController < ApplicationController
     end
   end
 
+  def update_chat_setting
+    @setting = ChatSetting.find_by(user_id: current_user.id)
+
+    @setting.update(chat_setting_params)
+
+    if @setting.update(message_params)
+      format.html { redirect_to messages_path, notice: "Settings was successfully updated." }
+      format.json { render :show, status: :ok, location: messages_path }
+      format.turbo_stream
+    else
+      format.html { render :edit, status: :unprocessable_entity }
+      format.json { render json: @new_message.errors, status: :unprocessable_entity }
+    end
+
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
@@ -110,6 +130,10 @@ class MessagesController < ApplicationController
 
     def user_location_params
       params.require(:location).permit(:latitude, :longitude)
+    end
+
+    def chat_setting_params
+      params.require(:chat_setting).permit(:user_id, :general, :business)
     end
 
 end
