@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
-  # before_action :update_user_location, only: [:index]
 
   # GET /messages or /messages.json
   def index
@@ -16,11 +15,11 @@ class MessagesController < ApplicationController
       elsif general == "0" && business == "1"
         puts "BUSINESS DOIT ETRE VISIBLE"
         @messages = Message.where(category: "business")
-      elsif general == "0" && business == "0"
-        @messages = ["Selectionne un salon"]
       else
-        @messages = Message.all
+        @messages = []
       end
+    else
+      @messages = Message.all
     end
     
     @new_message = Message.new

@@ -1,3 +1,5 @@
+<% if user_signed_in? %>
 <div data-controller="geolocation" data-geolocation-user-id-value="<%= current_user.id %>" >
   Géolocalisation : <%= current_user.location&.latitude %>, <%= current_user.location&.longitude %>
 </div>
+<% end %>

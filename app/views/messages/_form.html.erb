@@ -14,15 +14,11 @@
   <div class="new-message-container">
     <%= form.hidden_field :user_id, value: current_user.id %>
 
+    <%= form.select :category, options_for_select([["Général", "general"], ["Commerce", "business"]]) %>
+
     <%= form.text_field :content, value: message.content, placeholder: "écris ici" %>
     
-      <!--
-      <div>
-        <%= form.label :category, style: "display: block" %>
-        <%= form.text_field :category %>
-      </div>
-      -->
-    <%= form.submit %>
+    <%= form.submit "Envoyer" %>
   </div>
   
 <% end %>
