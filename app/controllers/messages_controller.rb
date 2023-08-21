@@ -1,30 +1,13 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
+  #after_action :filtered_messages, only: [ :update_chat_setting ]
 
   # GET /messages or /messages.json
   def index
-    chat_setting = ChatSetting.find_by(user_id: current_user.id)
-    if chat_setting
-      general = chat_setting.general
-      business = chat_setting.business
-      if general == "1" && business == "1"
-        puts "TOUT DOIT ETRE VISIBLE"
-        @messages = Message.where(category: ["general", "business"])
-      elsif general == "1" && business == "0"
-        puts "GENERAL DOIT ETRE VISIBLE"
-        @messages = Message.where(category: "general")
-      elsif general == "0" && business == "1"
-        puts "BUSINESS DOIT ETRE VISIBLE"
-        @messages = Message.where(category: "business")
-      elsif general == "0" && business == "0"
-        @messages = []
-      else
-        @messages = []
-      end
-    else
-      @messages = Message.all
-    end
-    
+    puts "#"*33
+    puts "DANS LA METHODE INDEX"
+    puts "#"*33
+    @messages = Message.all
     @new_message = Message.new
   end
 
@@ -56,6 +39,7 @@ class MessagesController < ApplicationController
         format.json { render json: @new_message.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /messages/1 or /messages/1.json
@@ -85,7 +69,9 @@ class MessagesController < ApplicationController
   end
 
   def update_user_location
-    puts "ON EST DANS LE MESSAGE CONTROLLER !"
+    puts "#"*33
+    puts "DANS LA METHODE UPDATE_USER_LOCATION"
+    puts "#"*33        
     puts "Params: #{params.inspect}"
     puts "Current user : #{current_user.id}"
 
@@ -98,23 +84,6 @@ class MessagesController < ApplicationController
     else
       render json: { error: "Erreur lors de la mise à jour des coordonnées." }, status: :unprocessable_entity
     end
-  end
-
-  def update_chat_setting
-    @setting = ChatSetting.find_by(user_id: current_user.id)
-
-    @setting.update(chat_setting_params)
-
-    if @setting.update(message_params)
-      format.html { redirect_to messages_path, notice: "Settings was successfully updated." }
-      format.json { render :show, status: :ok, location: messages_path }
-      format.turbo_stream
-    else
-      format.html { render :edit, status: :unprocessable_entity }
-      format.json { render json: @new_message.errors, status: :unprocessable_entity }
-    end
-
-    
   end
 
   private
@@ -130,10 +99,6 @@ class MessagesController < ApplicationController
 
     def user_location_params
       params.require(:location).permit(:latitude, :longitude)
-    end
-
-    def chat_setting_params
-      params.require(:chat_setting).permit(:user_id, :general, :business)
     end
 
 end

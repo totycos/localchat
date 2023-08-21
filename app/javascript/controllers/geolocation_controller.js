@@ -5,7 +5,7 @@ export default class GeolocationController extends Controller {
 
   connect() {
 
-    console.log("Stimulus connecté");
+    console.log("GeolocationController Stimulus connecté");
     if (navigator.geolocation) {
       navigator.geolocation.watchPosition(
         this.handlePosition.bind(this),

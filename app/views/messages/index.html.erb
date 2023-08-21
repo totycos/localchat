@@ -3,9 +3,10 @@
 <%= render 'shared/user_location' %>
 
 <h1>AROUND YOU:</h1>
-<%= render 'shared/chat_setting' %>
 
-<div id="messages" class="messages-container">
+<%= render 'shared/categories' %>
+
+<div id="messagesX" class="messages-container">
   <%= turbo_frame_tag "messages" do %>
     <%= render @messages %>
   <% end %>

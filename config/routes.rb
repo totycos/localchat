@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     patch :update_user_location, on: :collection
   end
 
-  resources :chat_settings, only: [:update]
 
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
