@@ -16,7 +16,7 @@
 
     <%= form.select :category, options_for_select([["Général", "general"], ["Commerce", "business"]]) %>
 
-    <%= form.text_field :content, value: message.content, placeholder: "écris ici" %>
+    <%= form.text_field :content, placeholder: "Écris ton message ici" %>
     
     <%= form.submit "Envoyer" %>
   </div>

@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
-  #after_action :filtered_messages, only: [ :update_chat_setting ]
 
   # GET /messages or /messages.json
   def index
@@ -17,7 +16,7 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
-    @message = Message.new
+    @new_message ||= Message.new
   end
 
   # GET /messages/1/edit
@@ -30,6 +29,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @new_message.save
+        @new_message = Message.new  # Réinitialisation de l'instance du message
         format.html { redirect_to messages_path, notice: "Message was successfully created." }
         format.json { render :index, status: :created, location: messages_path }
         format.turbo_stream
