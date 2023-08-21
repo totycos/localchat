@@ -6,9 +6,9 @@
 
 <%= render 'shared/categories' %>
 
-<div id="messages" class="messages-container">
+<div id="messages-container" class="messages-container">
   <%= turbo_frame_tag "messages" do %>
-    <%= render @messages %>
+    <%= render @messages.reverse %>
   <% end %>
 </div>
 

@@ -1,0 +1,21 @@
+.messages-container {
+  max-height: 300px; /* Ajustez la hauteur maximale selon vos besoins */
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.message {
+  margin-bottom: 0;
+}
+
+.new-message-container {
+  width: 100%;
+  display: flex;
+}
+
+#message_content {
+  width: 100%;
+}

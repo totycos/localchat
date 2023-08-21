@@ -6,8 +6,9 @@ class MessagesController < ApplicationController
     puts "#"*33
     puts "DANS LA METHODE INDEX"
     puts "#"*33
-    @messages = Message.all
+    @messages =  Message.all.order(created_at: :desc)
     @new_message = Message.new
+   
   end
 
   # GET /messages/1 or /messages/1.json
