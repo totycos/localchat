@@ -1,4 +1,2 @@
 <%= turbo_stream.append "messages", @message %>
-<%= puts "DANS LE CREATE TURBO STREAM" %>
 <%= turbo_stream.update "new_message", partial: "form", locals: { message: Message.new } %>
-<%= puts "DANS LE CREATE TURBO STREAM" %>
