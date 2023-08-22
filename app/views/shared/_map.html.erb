@@ -1,0 +1,4 @@
+<%= js_map [{latitude: current_user.location&.latitude, longitude: current_user.location&.longitude, tooltip: current_user.pseudo}],
+            markers: {color: "#1b9bd6"},
+            style: "mapbox://styles/mapbox/light-v11",
+            zoom: 13, controls: true %>

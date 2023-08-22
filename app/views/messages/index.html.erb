@@ -1,9 +1,9 @@
 <%= turbo_stream_from "messages" %>
 
 <div class="my-container">
-  <div class="map-container">
-    <%= js_map [{latitude: current_user.location&.latitude, longitude: current_user.location&.longitude}] %>
-  </div>
+  
+    <%= render 'shared/map' %>
+  
 
   <div class="chat-container">
     <%# render 'shared/user_location' %>

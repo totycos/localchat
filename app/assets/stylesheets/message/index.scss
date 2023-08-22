@@ -3,12 +3,3 @@
   flex-direction: column;
   height: calc(100vh - 56px); /* Hauteur totale de la fenêtre, moins la hauteur de la barre de navigation */
 }
-
-.map-container {
-  flex-grow: 1;   /* La carte occupe l'espace restant en hauteur */
-  overflow: hidden; /* Empêche tout débordement de contenu hors de la fenêtre */
-}
-
-.chat-container {
-  flex-grow: 1; /* La div chat-container s'adapte à la hauteur restante */
-}
