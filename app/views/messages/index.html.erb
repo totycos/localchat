@@ -1,21 +1,26 @@
 <%= turbo_stream_from "messages" %>
 
-<%= render 'shared/user_location' %>
+<div class="my-container">
+  <div class="map-container">
+    <%= js_map [{latitude: current_user.location&.latitude, longitude: current_user.location&.longitude}] %>
+  </div>
 
-<h1>AROUND YOU:</h1>
+  <div class="chat-container">
+    <%# render 'shared/user_location' %>
 
-<%= render 'shared/categories' %>
+    <%= render 'shared/categories' %>
 
-<div id="messages-container" class="messages-container">
-  <%= turbo_frame_tag "messages" do %>
-    <%= render @messages.reverse %>
-  <% end %>
+    <div id="messages-container" class="messages-container">
+      <%= turbo_frame_tag "messages" do %>
+        <%= render @messages.reverse %>
+      <% end %>
+    </div>
+
+    <% if user_signed_in? %>
+      <%= turbo_frame_tag "new_message" do %>
+        <%= render "form", message: @new_message %>
+      <% end %>
+    <% end %>
+  </div>
+  
 </div>
-
-<% if user_signed_in? %>
-  <%= turbo_frame_tag "new_message" do %>
-    <%= render "form", message: @new_message %>
-  <% end %>
-<% end %>
-  
-  

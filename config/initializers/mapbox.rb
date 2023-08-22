@@ -1,0 +1,1 @@
+Mapkick.options[:access_token]

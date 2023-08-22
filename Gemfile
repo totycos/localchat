@@ -53,7 +53,7 @@ gem "bootsnap", require: false
 
 # Added gems
 gem 'devise', '~> 4.9', '>= 4.9.2'
-gem 'geocoder', '~> 1.3', '>= 1.3.7'
+gem "mapkick-rb"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
