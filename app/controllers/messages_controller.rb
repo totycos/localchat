@@ -1,14 +1,16 @@
 class MessagesController < ApplicationController
+  include Userable
+
   before_action :set_message, only: %i[ show edit update destroy ]
 
   # GET /messages or /messages.json
   def index
+    users_list
     puts "#"*33
     puts "DANS LA METHODE INDEX"
     puts "#"*33
     @messages =  Message.all.order(created_at: :desc)
     @new_message = Message.new
-   
   end
 
   # GET /messages/1 or /messages/1.json

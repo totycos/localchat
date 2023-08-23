@@ -4,12 +4,11 @@
   
     <%= render 'shared/map' %>
   
-
   <div class="chat-container">
     <%# render 'shared/user_location' %>
 
     <%= render 'shared/categories' %>
-
+    
     <div id="messages-container" class="messages-container">
       <%= turbo_frame_tag "messages" do %>
         <%= render @messages.reverse %>
