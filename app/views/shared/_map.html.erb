@@ -1,32 +1,11 @@
-<%#= js_map [{latitude: current_user.location&.latitude, longitude: current_user.location&.longitude, tooltip: current_user.pseudo}, {latitude: 43.70908286131579, longitude: 7.292082793190219, tooltip: current_user.pseudo}],
-            markers: {color: "#1b9bd6"},
-            style: "mapbox://styles/mapbox/light-v11",
-            zoom: 13, controls: true %>
+<div id="map" 
+     data-marker='<%= @markers.to_json %>'
+     data-mapbox-api-key="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"
+     data-controller="mapbox">
 
-            <%= js_map(
-              @users.map do |user|
-                marker_color = (user.id == current_user.id) ? "#115fb2" : "#1b9bd6"
-                {
-                  latitude: user.location&.latitude,
-                  longitude: user.location&.longitude,
-                  tooltip: user.pseudo,
-                  markers: {
-                    color: marker_color
-                  }
-                }
-              end,
-              style: "mapbox://styles/mapbox/light-v11",
-              zoom: 13,
-              controls: true
-            ) %>
-            
+  <div data-mapbox-target="users"
+       data-currentuser='<%= { id: current_user.id, pseudo: current_user.pseudo, latitude: current_user.location.latitude, longitude: current_user.location.longitude }.to_json %>'
+       data-users='<%= @users.map { |user| { id: user.id, pseudo: user.pseudo, latitude: user.location.latitude, longitude: user.location.longitude } }.to_json %>'>
+  </div>
 
-            
-            
-
-
-
-<%#= js_map messages_path(format: :json),
-markers: {color: "#1b9bd6"},
-style: "mapbox://styles/mapbox/light-v11",
-zoom: 13, controls: true %>
+</div>
