@@ -1,6 +1,7 @@
 .messages-container {
   height: 100px;
   overflow-y: auto;
+  overflow-wrap: break-word;
   border: 1px solid #ccc;
   padding: 10px;
   display: flex;

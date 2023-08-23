@@ -1,6 +1,5 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
-// Connects to data-controller="mapbox"
 export default class extends Controller {
   static targets = ["users"];
 
@@ -15,10 +14,10 @@ export default class extends Controller {
     const mapElement = document.getElementById('map');
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
-      container: 'map', // Container ID
-      style: 'mapbox://styles/mapbox/streets-v12', // Map style to use
-      center: [currentUser.longitude, currentUser.latitude], // Starting position [lng, lat]
-      zoom: 13, // Starting zoom level
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [currentUser.longitude, currentUser.latitude],
+      zoom: 13,
     });
 
     const userMarkers = []; // Array to store user markers
@@ -26,7 +25,8 @@ export default class extends Controller {
     // Create and add the marker for the current user first
     const currentUserMarker = new mapboxgl.Marker({ color: 'pink' })
       .setLngLat([currentUser.longitude, currentUser.latitude])
-      .addTo(map);
+      .addTo(map)
+      .setPopup(new mapboxgl.Popup().setHTML(currentUser.pseudo)); // Set popup content to user's pseudo
 
     userMarkers.push(currentUserMarker);
 
@@ -35,11 +35,11 @@ export default class extends Controller {
       if (user.id !== currentUser.id) {
         const marker = new mapboxgl.Marker({ color: 'green' })
           .setLngLat([user.longitude, user.latitude])
-          .addTo(map);
+          .addTo(map)
+          .setPopup(new mapboxgl.Popup().setHTML(user.pseudo)); // Set popup content to user's pseudo
 
         userMarkers.push(marker);
       }
     });
   }
 }
-
