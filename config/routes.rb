@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  root "messages#index"
+
+  resources :users
+
   resources :messages do
     patch :update_user_location, on: :collection
     patch :update_chat_setting, on: :collection
@@ -10,10 +15,5 @@ Rails.application.routes.draw do
     patch :update_user_location, on: :collection
   end
 
-
-  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  root "messages#index"
 end

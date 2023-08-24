@@ -1,6 +1,6 @@
 <div id="<%= dom_id message %>" class="message" data-categories-target="message" data-category="<%= message.category %>">
   <p class="message">
-    <strong><%= message.user.pseudo %>:</strong>
+    <strong><%= link_to message.user.pseudo, user_path(message.user.id), data: {turbo_frame:"_top"} %>:</strong>
     <%= message.content %>
   </p>
 </div>

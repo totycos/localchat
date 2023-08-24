@@ -2,3 +2,33 @@
   height: 100%;
 }
 
+.mapboxgl-popup-content {
+  border: 3px solid black;
+  border-radius: 10px!important;
+}
+
+.map-popup {
+  
+}
+
+.mapboxgl-popup-content {
+  padding: 6px 16px!important;
+  text-align: center!important;
+}
+
+.mapboxgl-popup-close-button {
+  font-weight: bold;
+  padding: 0px 3px 0px 5px!important;
+  margin-top: -3px!important;
+}
+
+.popup-pseudo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.popup-feeling {
+  line-height: 1;
+  margin-bottom: 0;
+}

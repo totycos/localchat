@@ -4,8 +4,8 @@
      data-controller="mapbox">
 
   <div data-mapbox-target="users"
-       data-currentuser='<%= { id: current_user.id, pseudo: current_user.pseudo, latitude: current_user.location.latitude, longitude: current_user.location.longitude }.to_json %>'
-       data-users='<%= @users.map { |user| { id: user.id, pseudo: user.pseudo, latitude: user.location.latitude, longitude: user.location.longitude } }.to_json %>'>
+       data-currentuser='<%= { id: current_user.id, pseudo: current_user.pseudo, feeling: current_user.feeling, bio: current_user.bio, latitude: current_user.location.latitude, longitude: current_user.location.longitude }.to_json %>'
+       data-users='<%= @users.map { |user| { id: user.id, pseudo: user.pseudo, feeling: user.feeling, bio: user.bio, latitude: user.location.latitude, longitude: user.location.longitude } }.to_json %>'>
   </div>
 
 </div>

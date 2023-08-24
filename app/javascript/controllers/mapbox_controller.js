@@ -17,7 +17,7 @@ export default class extends Controller {
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
       center: [currentUser.longitude, currentUser.latitude],
-      zoom: 13,
+      zoom: 20,
     });
 
     const userMarkers = []; // Array to store user markers
@@ -26,7 +26,9 @@ export default class extends Controller {
     const currentUserMarker = new mapboxgl.Marker({ color: 'pink' })
       .setLngLat([currentUser.longitude, currentUser.latitude])
       .addTo(map)
-      .setPopup(new mapboxgl.Popup().setHTML(currentUser.pseudo)); // Set popup content to user's pseudo
+      .setPopup(new mapboxgl.Popup().setHTML(
+        '<div class="map-popup"> <a href=/users/'+ currentUser.id + '> <p class="popup-pseudo">' + currentUser.pseudo + '</p> <p class="popup-feeling">' + currentUser.feeling + '</p></a></div>'
+      )); // Set popup content to user's pseudo
 
     userMarkers.push(currentUserMarker);
 
@@ -36,7 +38,9 @@ export default class extends Controller {
         const marker = new mapboxgl.Marker({ color: 'green' })
           .setLngLat([user.longitude, user.latitude])
           .addTo(map)
-          .setPopup(new mapboxgl.Popup().setHTML(user.pseudo)); // Set popup content to user's pseudo
+          .setPopup(new mapboxgl.Popup().setHTML(
+            '<div class="map-popup>" <a href=/users/'+ user.id + '> <p class="popup-pseudo">' + user.pseudo + '</p> <p class="popup-feeling">' + user.feeling + '</p></a></div>'
+          )); // Set popup content
 
         userMarkers.push(marker);
       }
