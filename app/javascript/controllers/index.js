@@ -10,8 +10,5 @@ application.register("categories", CategoriesController)
 import GeolocationController from "./geolocation_controller"
 application.register("geolocation", GeolocationController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import MapboxController from "./mapbox_controller"
 application.register("mapbox", MapboxController)

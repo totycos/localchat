@@ -12,9 +12,29 @@
   margin-bottom: 0;
 }
 
+/* Style pour les div avec data-category="business" */
+div[data-categories-target="message"][data-category="business"] {
+  color: brown;
+}
+
+/* Style pour les div avec data-category="general" */
+div[data-categories-target="message"][data-category="general"] {
+  color: black;
+}
+
 .new-message-container {
   width: 100%;
   display: flex;
+}
+
+#message_category option.general::before {
+  content: "Général: ";
+  color: black;
+}
+
+#message_category option.business::before {
+  content: "Commerce: ";
+  color: brown;
 }
 
 #message_content {

@@ -13,14 +13,14 @@ export default class extends Controller {
   }
 
   updateMessages() {
-    console.log("updateMessages is working");
+    console.log("ON EST DANS CATEGORIES CONTROLLER");
     const categoryCheckboxes = document.querySelectorAll('[data-action="categories#toggleCategory"]');
-    console.log(categoryCheckboxes)
+    //console.log(categoryCheckboxes)
     const selectedCategories = Array.from(categoryCheckboxes)
       .filter(checkbox => checkbox.checked)
       .map(checkbox => checkbox.value);
-      console.log(selectedCategories);
-      console.log(this.messageTargets);
+      //console.log(selectedCategories);
+      //console.log(this.messageTargets);
     this.messageTargets.forEach(message => {
       const messageCategory = message.dataset.category;
       if ( selectedCategories.includes(messageCategory)) {

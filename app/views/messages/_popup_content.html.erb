@@ -1,0 +1,7 @@
+<div class="map-popup">
+  <a href='<%= user_path(current_user) %>'>
+    <p class="popup-pseudo"><%= current_user.pseudo %></p>
+    <p class="popup-feeling"><%= current_user.feeling %></p>
+    <p class="popup-message"><%= @new_message.content %></p>
+  </a>
+</div>

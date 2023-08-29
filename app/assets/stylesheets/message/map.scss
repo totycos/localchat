@@ -7,8 +7,9 @@
   border-radius: 10px!important;
 }
 
-.map-popup {
-  
+#current-user-marker {
+  z-index: 1;
+  margin-top: 5px; // Pour etre capable de voir mon autre user test utilisant la meme location
 }
 
 .mapboxgl-popup-content {
