@@ -64,14 +64,29 @@ export default class extends Controller {
           }
         };
         
+        // Check if a current-user-marker already exist and remove it
+        const currentUserMarkerPresent = document.getElementById("current-user-marker"); 
+        console.log(`currentUserMarkerPresent = ${currentUserMarkerPresent}`);
+        if (currentUserMarkerPresent) {
+          currentUserMarkerPresent.remove(); 
+         }
+
         // Create and add the marker for the current user first with our custom Marker
         const currentUserMarker = new ClickableMarker()
-          .setLngLat([currentUser.longitude, currentUser.latitude])
-          .addTo(map)
-          
+            .setLngLat([currentUser.longitude, currentUser.latitude])
+            .addTo(map)
+            
         currentUserMarker._element.id = "current-user-marker"; // id defini pour changer couleur du current user marker
 
         //userMarkers.push(currentUserMarker);
+
+        // Check if a user-marker already exist and remove it
+        const userMarkerPresent = document.querySelectorAll(".user-marker");
+        if (userMarkerPresent.length > 0) {
+          userMarkerPresent.forEach((marker) => {
+            marker.remove();
+          });
+        }
 
         // Create and add markers for other users
         let userMarkers = {}; // Array to store user markers
@@ -82,7 +97,7 @@ export default class extends Controller {
               .setLngLat([user.longitude, user.latitude])
               .addTo(map)
             
-            userMarker._element.class = "user-marker"; // id defini pour changer couleur des user marker
+            userMarker._element.classList.add("user-marker"); // id defini pour changer couleur des user marker
 
             userMarkers[user.id] = userMarker;
           }
