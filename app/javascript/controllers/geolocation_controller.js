@@ -20,8 +20,8 @@ export default class GeolocationController extends Controller {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    console.log("Latitude:", latitude);
-    console.log("Longitude:", longitude);
+    //console.log("Latitude:", latitude);
+    //console.log("Longitude:", longitude);
 
     // Envoi des nouvelles coordonnées au serveur via une requête AJAX
     const updateUrl = `/messages/update_user_location`;

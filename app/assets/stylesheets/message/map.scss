@@ -2,14 +2,13 @@
   height: 100%;
 }
 
-.mapboxgl-popup-content {
-  border: 3px solid black;
-  border-radius: 10px!important;
-}
-
 #current-user-marker {
   z-index: 1;
   margin-top: 5px; // Pour etre capable de voir mon autre user test utilisant la meme location
+}
+
+#current-user-marker > svg > path {
+  fill: pink;
 }
 
 .mapboxgl-popup-content {
@@ -21,6 +20,30 @@
   font-weight: bold;
   padding: 0px 3px 0px 5px!important;
   margin-top: -3px!important;
+}
+
+.mapboxgl-popup {
+  z-index: 2;
+}
+
+#message-current-user-popup {
+  margin-top: -25px;
+}
+
+
+#message-current-user-popup > .mapboxgl-popup-tip{
+  visibility: hidden;
+  display: none;
+}
+
+.mapboxgl-popup-content {
+  border: 3px solid black;
+  border-radius: 10px!important;
+}
+
+.current-user-popup-content > .mapboxgl-popup-close-button{
+  visibility: hidden;
+  display: none;
 }
 
 .popup-pseudo {
