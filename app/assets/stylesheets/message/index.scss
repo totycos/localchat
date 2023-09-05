@@ -1,5 +1,6 @@
 .my-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 56px); /* Hauteur totale de la fenêtre, moins la hauteur de la barre de navigation */
+  //height: calc(100vh - 56px); /* Hauteur totale de la fenêtre, moins la hauteur de la barre de navigation */
+  height: calc(100vh);
 }

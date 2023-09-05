@@ -2,3 +2,14 @@
   visibility: hidden;
   display: none;
 }
+
+.extend-messages-container-arrow {
+  width: 19px;
+  margin: 2px 4px 0px 6px;
+  vertical-align: sub;
+  transition: transform 0.3s ease;
+}
+
+.extend-messages-container-arrow.rotated {
+  transform: rotate(180deg);
+}

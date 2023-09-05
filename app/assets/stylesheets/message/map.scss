@@ -1,5 +1,7 @@
 #map {
   height: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 #current-user-marker {
@@ -8,7 +10,7 @@
 }
 
 #current-user-marker > svg > path {
-  fill: pink;
+  fill: rgb(255, 115, 0);
 }
 
 .mapboxgl-popup-content {
@@ -20,6 +22,8 @@
   font-weight: bold;
   padding: 0px 3px 0px 5px!important;
   margin-top: -3px!important;
+  display: none;
+  visibility: hidden;
 }
 
 .mapboxgl-popup {
@@ -30,10 +34,17 @@
   margin-top: -25px;
 }
 
+#message-user-popup .mapboxgl-popup-content {
+  border: 1px solid black;
+}
 
-#message-current-user-popup > .mapboxgl-popup-tip{
-  visibility: hidden;
-  display: none;
+
+#message-user-popup > .mapboxgl-popup-tip{
+  background: url('assets/tip.svg') no-repeat center center;
+  margin-top: -1px;
+  border: 0;
+  width: 20px;
+  height: 10px;
 }
 
 .mapboxgl-popup-content {
@@ -41,7 +52,11 @@
   border-radius: 10px!important;
 }
 
-.current-user-popup-content > .mapboxgl-popup-close-button{
+.current-user-popup-content::after {
+  border: 0;
+}
+
+.current-user-popup-content > .mapboxgl-popup-close-button {
   visibility: hidden;
   display: none;
 }

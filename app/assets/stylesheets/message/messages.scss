@@ -1,12 +1,30 @@
+.chat-container {
+  z-index: 1000000;
+  position: fixed;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.85);
+  height: auto;
+  min-height: 150px;
+  width: 100%;
+}
+
 .messages-container {
-  height: 100px;
+  height: calc(20vh);
+  max-height: calc(100vh - 53px); // 24px represente la hauteur de la barre de selection des categories
   overflow-y: auto;
   overflow-wrap: break-word;
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 10px 10px 2px 10px;
   display: flex;
   flex-direction: column-reverse;
+  margin-bottom: 29px; // 29px represente la hauteur de la barre de nouveau message
 }
+
+.messages-container.extended {
+  height: calc(100vh - 53px); /* Hauteur étendue */
+  transition: height 0.3s ease;
+}
+
 
 .message {
   margin-bottom: 0;
@@ -25,6 +43,8 @@ div[data-categories-target="message"][data-category="general"] {
 .new-message-container {
   width: 100%;
   display: flex;
+  position: fixed;
+  bottom: 0;
 }
 
 #message_category option.general::before {

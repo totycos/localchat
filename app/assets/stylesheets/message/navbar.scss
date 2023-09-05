@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+
+.navbar {
+  width: 100%;
+  background-color: #fff8dc00!important;
+  z-index: 220;
+    position: absolute;
+}
+
+.navbar-brand > a {
+  color: #212529;
+  font-weight: 900;
+  font-family: 'Lilita One', cursive;
+  font-size: 30px;
+}
+
+.dropup, .dropend, .dropdown, .dropstart, .dropup-center, .dropdown-center {
+  background-color: rgba(255, 255, 255, 0.85);
+  position: absolute;
+  right: 8px;
+  top: 8px;
+}
+
+.dropdown-menu {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+

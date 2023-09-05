@@ -6,6 +6,7 @@ export default class extends Controller {
   connect() {
     console.log("ON EST DANS MAPBOX_CONTROLLER.JS !");
    
+    /* ################################################################ */
     /* #### SET VARIABLES POUR LA CARTE QUAND PAS DE USER CONNECTÉ #### */
     /* ################################################################ */
     let centerCoordinates = [2.3522, 48.8566]; // Coordonnées GPS de Paris
@@ -27,20 +28,21 @@ export default class extends Controller {
       const usersArray = JSON.parse(usersData);
 
       if (Array.isArray(usersArray)) {
+        /* ################################################################ */
         /* ########################### SET MAP ############################ */
         /* ################################################################ */
         const mapElement = document.getElementById('map');
         mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
         const map = new mapboxgl.Map({
           container: 'map',
-          style: 'mapbox://styles/mapbox/streets-v12',
+          style: 'mapbox://styles/alex56545/clm53xnus00un01quf5sa2g3y',
           center: centerCoordinates,
           zoom: zoomLevel,
         });
 
-        map.addControl(new mapboxgl.NavigationControl());
+       // map.addControl(new mapboxgl.NavigationControl());
 
-
+        /* ################################################################ */
         /* ######################### SET MARKERS ########################## */
         /* ################################################################ */
 
@@ -102,8 +104,10 @@ export default class extends Controller {
             userMarkers[user.id] = userMarker;
           }
         });
-        console.log(userMarkers);
+       
+        
 
+        /* ################################################################ */
         /* ################## SET SURVOL POPUPS (PSEUDO) ################## */
         /* ################################################################ */
 
@@ -186,37 +190,77 @@ export default class extends Controller {
           }
         });
 
+        /* ################################################################ */
         /* ################## SET CLICK POPUPS (MESSAGE) ################## */
         /* ################################################################ */
 
         /* ############ CURRENT USER ############# */
-       
-        // Créez le contenu du popup pour le clic
-        const currentUserClicPopupContent = '<div class="message-current-user-popup">Popup affiché au clic. Futur popup affiché à l\'envoi de message</div>';
 
-        // Création du popup
-        const currentUserClicPopup = new mapboxgl.Popup()
-          .setLngLat([currentUser.longitude, currentUser.latitude])
-          .setHTML(currentUserClicPopupContent)
+        // Fonction pour surveiller l'ajout de nouveaux messages
+        function surveillerNouveauxMessages() {
 
-        // Affichage du popup au clic
-        currentUserMarker.onClick(() => {
-          currentUserClicPopup.addTo(map);
-          currentUserClicPopup.getElement().id = 'message-current-user-popup';
+          // Créez un observateur de mutations pour surveiller les ajouts d'éléments
+          const messagesFrame = document.getElementById('messages');
 
-          let messageCurrentUserPopup = document.querySelector('#message-current-user-popup');
-          let messageCurrentUserPopupTip = document.querySelector('#message-current-user-popup > .mapboxgl-popup-tip');
-          let messageCurrentUserPopupClose = document.querySelector('#message-current-user-popup > div.mapboxgl-popup-content > button');
+          // Créez un observateur de mutations pour surveiller les ajouts d'éléments
+          const observer = new MutationObserver((mutationsList) => {
+            for (const mutation of mutationsList) {
+              if (mutation.type === 'childList') {
+                for (const node of mutation.addedNodes) {
+                  if (node instanceof Element && node.getAttribute('data-category') === 'general' ) {
 
-          messageCurrentUserPopup.style.marginTop = '-35px';
-          messageCurrentUserPopupTip.style.visibility = 'hidden';
-          messageCurrentUserPopupTip.style.display = 'none';
-          messageCurrentUserPopupClose.style.visibility = 'hidden';
-          messageCurrentUserPopupClose.style.display = 'none';
-        });
+                    // Récupérer la location de l'expediteur
+                    const messageLatitude = node.getAttribute('data-latitude');
+                    const messageLongitude = node.getAttribute('data-longitude');
+
+                    // Récupérez le contenu du message depuis l'élément
+                    const messageContent = node.querySelector('.message p').textContent;
+                    // Utilisez une expression régulière pour supprimer le nom d'utilisateur et les deux points
+                    const messageContentCleaned = messageContent.replace(/^[^:]+:\s*/, '');
+
+                    // Créez le contenu du popup pour le clic
+                    const currentUserClicPopupContent = `<div class="message-user-popup">${messageContentCleaned}</div>`;
+
+                    // Création du popup
+                    const currentUserClicPopup = new mapboxgl.Popup()
+                      .setLngLat([messageLongitude, messageLatitude])
+                      .setHTML(currentUserClicPopupContent)
+
+                    // Affichage du popup a l'envoi d'un message
+                    currentUserClicPopup.addTo(map);
+                    currentUserClicPopup.getElement().id = 'message-user-popup';
+
+                    let messageCurrentUserPopup = document.querySelector('#message-user-popup');
+                    let messageCurrentUserPopupTip = document.querySelector('#message-user-popup > .mapboxgl-popup-tip');
+                    let messageCurrentUserPopupClose = document.querySelector('#message-user-popup > div.mapboxgl-popup-content > button');
+
+                    messageCurrentUserPopup.style.marginTop = '-35px';
+                    messageCurrentUserPopupClose.style.visibility = 'hidden';
+                    messageCurrentUserPopupClose.style.display = 'none';
+
+                     // Calculez la durée de lecture estimée en fonction du contenu du popup
+                    const mots = messageContentCleaned.split(' ').length; // Nombre de mots dans le contenu
+                    const vitesseLectureMoyenne = 125; // Vitesse de lecture moyenne en mots par minute
+                    const tempsLectureEstime = (mots / vitesseLectureMoyenne) * 60 * 1000; // Temps en millisecondes
+
+                    // Fermez automatiquement le popup après la durée de lecture estimée
+                    setTimeout(function() {
+                      currentUserClicPopup.remove(); // Supprimez le popup après la durée estimée
+                    }, tempsLectureEstime);
+                  }
+                }
+              }
+            }
+          });
+        
+          // Configurez l'observateur pour surveiller les ajouts d'enfants dans le TurboFrame
+          observer.observe(messagesFrame, { childList: true });
+        }
+
+        surveillerNouveauxMessages();
 
         /* ############### USER ################ */
-
+        /*
         usersArray.forEach(user => {
           if (user.id !== currentUser.id) {
             const userMarker = userMarkers[user.id];
@@ -246,7 +290,7 @@ export default class extends Controller {
            });
           }
         });
-
+        */
       }
     }
   }
