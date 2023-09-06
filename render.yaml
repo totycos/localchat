@@ -1,0 +1,18 @@
+databases:
+  - name: localchat_production
+    plan: free
+
+services:
+  - type: web
+    plan: free
+    name: localchat
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: localchat_production
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
